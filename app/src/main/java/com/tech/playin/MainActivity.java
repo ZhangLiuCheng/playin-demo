@@ -76,12 +76,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
 
         sdkKey = SharedPreferencesUtil.getSdkKey(this);
 
-        //  VOODOO
-//        sdkKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoic2Vzc2lvbl9rZXkiLCJ1c2VyX2lkIjo2MCwiaWF0IjoxNTY2MjA3MDgwfQ.5Z0TaqC2cs59BkeflR8XGCCJ9EfK3sDLWP2DC_TaTao";
-
-        // perfect escape
-//        sdkKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3MTU2NTY3fQ.0bzcPIphInYvguVP51RKIHNjq9WRu7RPXKtdCgPUiHw";
-
         if (TextUtils.isEmpty(sdkKey)) {
             Toast.makeText(this, "Please set key first", Toast.LENGTH_SHORT).show();
             return;
