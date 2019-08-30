@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/videoLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".VideoFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/coverView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <com.tech.playin.widget.CountdownView
+        android:id="@+id/videoCountView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/funcLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:visibility="gone">
+
+        <ToggleButton
+            android:id="@+id/voice"
+            android:visibility="gone"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/toggle_voice"
+            android:checked="true"
+            android:textOff="@null"
+            android:textOn="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <Button
+            android:id="@+id/playNow"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/button_play_now"
+            android:text="Play Now"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

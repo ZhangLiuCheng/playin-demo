@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/border_bottom">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Scan Code"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/album"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="Album"
+            android:textColor="#0000ff"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <cn.simonlee.xcodescanner.view.MaskConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:frame_viewid="@id/scannerframe">
+
+        <cn.simonlee.xcodescanner.view.AdjustTextureView
+            android:id="@+id/textureview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <cn.simonlee.xcodescanner.view.ScannerFrameView
+            android:id="@+id/scannerframe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:frame_whRatio="1"
+            app:frame_widthRatio="0.7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.33"
+            app:scan_cycle="1500" />
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#80888888"
+            android:padding="5dp"
+            android:text="Put the qr code into the box"
+            android:textColor="#DADADA"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scannerframe" />
+
+
+    </cn.simonlee.xcodescanner.view.MaskConstraintLayout>
+</LinearLayout>
