@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tech.playin.adapter.AdvertAdapter;
 import com.tech.playin.util.DownloadUtil;
@@ -37,8 +39,6 @@ import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity implements RecyclerItemLisener<Advert>,
         DownloadUtil.DownloadListener {
-
-    public static final int REQUEST_QRCODE = 1;
 
     private String sdkKey;
 
@@ -96,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
         });
     }
 
+    private void initRecyclerView(List<Advert> adverts) {
+        recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(OrientationHelper. VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new AdvertAdapter(this, adverts, this));
+        recyclerView.addItemDecoration(new RecyclerLinearDivider(LinearLayoutManager.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
     // 获取游戏列表
     private void getGameList() {
         PlayInSdk.getInstance().userAppKeys(new HttpListener<List<Advert>>() {
@@ -121,8 +131,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
                     @Override
                     public void accept(Boolean granted) {
                         if (granted) {
-                            Intent intent = new Intent(MainActivity.this, ScanActivity.class);
-                            startActivityForResult(intent, REQUEST_QRCODE);
+                            toScan();
                         } else {
                             Toast.makeText(MainActivity.this,"Need camera permission to scan code", Toast.LENGTH_SHORT).show();
                         }
@@ -130,29 +139,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
                 });
     }
 
-    private void initRecyclerView(List<Advert> adverts) {
-        recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(OrientationHelper. VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new AdvertAdapter(this, adverts, this));
-        recyclerView.addItemDecoration(new RecyclerLinearDivider(LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-    }
-
     @Override
     public void onItemClick(View view, Advert item) {
         toGame(item);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUEST_QRCODE) {
-            sdkKey = data.getStringExtra("barCode");
-            SharedPreferencesUtil.setSdkKey(MainActivity.this, sdkKey);
-            initData();
-        }
+    private void toScan() {
+        new IntentIntegrator(this)
+                .setCaptureActivity(ScanActivity.class)
+                .setPrompt("")
+                .initiateScan();
     }
 
     private void toGame(Advert advert) {
@@ -215,5 +211,34 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
     @Override
     public void onDownloadComplete() {
         dismissLoadingDialog();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            String barCodeResult = data.getStringExtra("BarCodeResult");
+            if (!TextUtils.isEmpty(barCodeResult)) {
+                // 相册选择二维码
+                updateSdkKey(barCodeResult);
+            } else {
+                // 摄像头扫码
+                IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+                if(result != null && result.getContents() != null) {
+                    updateSdkKey(result.getContents());
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void updateSdkKey(String qrCode) {
+        if (Tool.codeValidate(qrCode)) {
+            sdkKey = qrCode;
+            SharedPreferencesUtil.setSdkKey(MainActivity.this, qrCode);
+            initData();
+        } else {
+            Toast.makeText(this, "invalid qr code", Toast.LENGTH_SHORT).show();
+        }
     }
 }

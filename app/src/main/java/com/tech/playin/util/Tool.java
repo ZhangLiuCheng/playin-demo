@@ -2,13 +2,38 @@ package com.tech.playin.util;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Base64;
 
 import com.tech.playinsdk.model.entity.Advert;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tool {
+
+    /**
+     * 验证二维码是否为PlayIn的.
+     * @param barCode
+     * @return
+     */
+    public static boolean codeValidate(String qrCode) {
+        try {
+            String[] barArr = qrCode.split("\\.");
+            // 长度校验
+            if (barArr.length != 3) {
+                return false;
+            }
+            // json校验
+            new JSONObject(new String(Base64.decode(barArr[0], Base64.DEFAULT)));
+            new JSONObject(new String(Base64.decode(barArr[1], Base64.DEFAULT)));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
     /**
      * 移除没有googlePaly下载地址的游戏 并且 去重
