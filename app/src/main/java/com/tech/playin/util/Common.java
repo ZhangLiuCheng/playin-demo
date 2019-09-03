@@ -11,11 +11,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tool {
+public class Common {
 
     /**
      * 验证二维码是否为PlayIn的.
-     * @param barCode
+     * @param qrCode
      * @return
      */
     public static boolean codeValidate(String qrCode) {

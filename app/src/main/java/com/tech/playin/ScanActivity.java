@@ -11,9 +11,7 @@ import android.widget.Toast;
 import com.google.zxing.Result;
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
-import com.tech.playin.util.CodeScanningUtil;
-import com.tech.playinsdk.util.PILog;
-
+import com.tech.playin.util.QRCodeUtil;
 
 public class ScanActivity extends CaptureActivity implements View.OnClickListener {
 
@@ -78,14 +76,13 @@ public class ScanActivity extends CaptureActivity implements View.OnClickListene
 
         @Override
         protected Result doInBackground(Uri... params) {
-            return CodeScanningUtil.scanImage(ScanActivity.this, uri);
+            return QRCodeUtil.scanImage(ScanActivity.this, uri);
         }
 
         @Override
         protected void onPostExecute(Result result) {
             super.onPostExecute(result);
             if (!isCancelled()) {
-                PILog.e("onPostExecute   "  + result);
                 if (null != result) {
                     String qrCode = result.getText();
                     Intent intent = new Intent();

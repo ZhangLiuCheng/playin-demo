@@ -3,7 +3,7 @@ package com.tech.playin.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class SharedPreferencesUtil {
+public class PreferencesUtil {
 
     public static final String PRE_NAME = "playInSdk";
     public static final String KEY_SDK = "sdkKey";

@@ -21,11 +21,12 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tech.playin.adapter.AdvertAdapter;
+import com.tech.playin.util.Constants;
 import com.tech.playin.util.DownloadUtil;
 import com.tech.playin.util.RecyclerItemLisener;
 import com.tech.playin.util.RecyclerLinearDivider;
-import com.tech.playin.util.SharedPreferencesUtil;
-import com.tech.playin.util.Tool;
+import com.tech.playin.util.PreferencesUtil;
+import com.tech.playin.util.Common;
 import com.tech.playinsdk.PlayInSdk;
 import com.tech.playinsdk.http.HttpException;
 import com.tech.playinsdk.http.HttpListener;
@@ -72,10 +73,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
 
     private void initData() {
         TextView verNameTv = findViewById(R.id.verName);
-        verNameTv.setText("v " + Tool.getVerName(this));
+        verNameTv.setText("v " + Common.getVerName(this));
+        sdkKey = PreferencesUtil.getSdkKey(this);
 
-        sdkKey = SharedPreferencesUtil.getSdkKey(this);
-
+        // 固定渠道写死sdkkey
+        if (!TextUtils.isEmpty(Constants.SDK_KEY)) {
+            sdkKey = Constants.SDK_KEY;
+        }
         if (TextUtils.isEmpty(sdkKey)) {
             Toast.makeText(this, "Please set key first", Toast.LENGTH_SHORT).show();
             return;
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
             public void failure(Exception ex) {
                 dismissLoadingDialog();
                 showErrorDialog("Initialization failure");
-                SharedPreferencesUtil.setSdkKey(MainActivity.this, null);
+                PreferencesUtil.setSdkKey(MainActivity.this, null);
             }
         });
     }
@@ -233,9 +237,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
     }
 
     private void updateSdkKey(String qrCode) {
-        if (Tool.codeValidate(qrCode)) {
+        if (Common.codeValidate(qrCode)) {
             sdkKey = qrCode;
-            SharedPreferencesUtil.setSdkKey(MainActivity.this, qrCode);
+            PreferencesUtil.setSdkKey(MainActivity.this, qrCode);
             initData();
         } else {
             Toast.makeText(this, "invalid qr code", Toast.LENGTH_SHORT).show();

@@ -35,6 +35,44 @@ android {
             jni.srcDirs = []
         }
     }
+
+    flavorDimensions 'platform'
+    productFlavors {
+        demo {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin'
+            resValue "string", "app_name", "PlayIN"
+            buildConfigField "String", "PI_SDK_KEY", '""'
+        }
+
+        ironsrc {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.is'
+            resValue "string", "app_name", "playIN_IS"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDcsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY2Mzk0OTk2fQ.AIPes2mFO0kSTDJ2ui31I_5b6PMgF3EJUyP0QbzMEgo"'
+        }
+
+        voodoo {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.vd'
+            resValue "string", "app_name", "playIN_VD"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoic2Vzc2lvbl9rZXkiLCJ1c2VyX2lkIjo2MCwiaWF0IjoxNTY2MjA3MDgwfQ.5Z0TaqC2cs59BkeflR8XGCCJ9EfK3sDLWP2DC_TaTao"'
+        }
+
+        amanotes {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.an'
+            resValue "string", "app_name", "playIN_AN"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5NSwidHlwZSI6InNka19rZXkiLCJpYXQiOjE1NjU1ODM5ODR9.g7AbYH_ZIw9X1ecduM0VLgAHIdWr9ic2E0yXy8MEsQM"'
+        }
+
+        mintegral {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.mg'
+            resValue "string", "app_name", "playIN_MG"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3MTU2NTY3fQ.0bzcPIphInYvguVP51RKIHNjq9WRu7RPXKtdCgPUiHw"'
+        }
+    }
 }
 
 dependencies {
