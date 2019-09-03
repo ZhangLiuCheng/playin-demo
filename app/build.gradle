@@ -36,6 +36,15 @@ android {
         }
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def outPath = variant.buildType.isDebuggable() ? "debug" : "relseae"
+            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apks/" + outPath)
+            outputFileName = "playin_${variant.productFlavors[0].name}_v${defaultConfig.versionName}_${variant.buildType.name}.apk"
+        }
+    }
+
+
     flavorDimensions 'platform'
     productFlavors {
         demo {
