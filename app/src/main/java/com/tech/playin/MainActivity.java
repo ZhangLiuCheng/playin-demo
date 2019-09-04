@@ -21,15 +21,15 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tech.playin.adapter.AdvertAdapter;
+import com.tech.playin.util.Common;
 import com.tech.playin.util.Constants;
 import com.tech.playin.util.DownloadUtil;
+import com.tech.playin.util.PreferencesUtil;
 import com.tech.playin.util.RecyclerItemLisener;
 import com.tech.playin.util.RecyclerLinearDivider;
-import com.tech.playin.util.PreferencesUtil;
-import com.tech.playin.util.Common;
 import com.tech.playinsdk.PlayInSdk;
 import com.tech.playinsdk.http.HttpException;
-import com.tech.playinsdk.http.HttpListener;
+import com.tech.playinsdk.listener.HttpListener;
 import com.tech.playinsdk.listener.InitListener;
 import com.tech.playinsdk.model.entity.Advert;
 

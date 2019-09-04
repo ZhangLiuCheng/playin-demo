@@ -1,16 +1,22 @@
 package com.tech.playin;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.Toast;
+
 import com.tech.playinsdk.PlayInView;
 import com.tech.playinsdk.listener.PlayListener;
 import com.tech.playinsdk.model.entity.Advert;
-import com.tech.playinsdk.util.PILog;
+import com.tech.playinsdk.util.PlayLog;
 
-public class GameActivity extends AppCompatActivity implements VideoFragment.VideoFragmentListener {
+public class GameActivity extends AppCompatActivity implements VideoFragment.VideoFragmentListener, PlayListener {
 
     private final String TAG_VIDEO_FRAGMENT = "tagVideoFragment";
     private final Handler handler = new Handler();
@@ -34,7 +40,8 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
 
     private void addVideoFragment(Advert advert) {
         VideoFragment videoFragment = VideoFragment.newInstance(advert);
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .replace(R.id.videoContainer, videoFragment, TAG_VIDEO_FRAGMENT)
                 .commit();
     }
@@ -49,36 +56,8 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     private void playGame() {
         Advert ad = advert;
         PlayInView playView = findViewById(R.id.playView);
-        playView.play(ad.getAdId(), ad.getAppName(), ad.getAppIcon(),
-                ad.getAppCover(), ad.getGoogleplayUrl(), 120, 2, new PlayListener() {
-            @Override
-            public void onPlaystart() {
-                PILog.v("试玩成功");
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        removeVideoFragment();
-                    }
-                });
-            }
+        playView.play(ad.getAdId(), 120, this);
 
-            @Override
-            public void onPlayClose() {
-                finish();
-            }
-
-            @Override
-            public void onPlayError(Exception ex) {
-                PILog.e("onPlayError " + ex);
-                playing = false;
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        removeVideoFragment();
-                    }
-                });
-            }
-        });
     }
 
     @Override
@@ -97,5 +76,53 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
             playing = true;
             playGame();
         }
+    }
+
+    @Override
+    public void onPlaystart() {
+        removeVideoFragment();
+    }
+
+    @Override
+    public void onPlayClose() {
+        finish();
+    }
+
+    @Override
+    public void onPlayError(Exception ex) {
+        playing = false;
+        removeVideoFragment();
+        showErrorDialog();
+    }
+
+    @Override
+    public void onPlayDownload(String url) {
+        if (TextUtils.isEmpty(url) || "null".equals(url)) {
+            Toast.makeText(this, "There is no googlePlay download url", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+            finish();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            PlayLog.e("download app error：" + ex);
+        }
+    }
+
+    private void showErrorDialog() {
+        if (isFinishing()) return;
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setMessage("Exception, click confirm to return")
+                .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).create();
+        dialog.setCancelable(false);
+        dialog.show();
     }
 }

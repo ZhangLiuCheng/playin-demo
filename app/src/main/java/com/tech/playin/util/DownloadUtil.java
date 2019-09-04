@@ -5,8 +5,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 
 import com.tech.playinsdk.model.entity.Advert;
-import com.tech.playinsdk.util.PILog;
-import com.tech.playinsdk.util.Tool;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +22,7 @@ public class DownloadUtil {
 
     public interface DownloadListener {
         void onDownloadUpdate(Advert advert);
+
         void onDownloadComplete();
     }
 
@@ -31,7 +30,7 @@ public class DownloadUtil {
                                              final DownloadListener listener) {
         final CountDownLatch latch = new CountDownLatch(adverts.size());
         ExecutorService exe = Executors.newCachedThreadPool();
-        for (int i = 0; i < adverts.size(); i ++) {
+        for (int i = 0; i < adverts.size(); i++) {
             final Advert ad = adverts.get(i);
             exe.submit(new Runnable() {
                 @Override
@@ -57,7 +56,6 @@ public class DownloadUtil {
     }
 
     public static void downloadVideo(Context context, Advert advert, DownloadListener listener) {
-        PILog.v("下载视频： " + advert.getAppName() + "    " + advert.getVideoUrl());
         if (TextUtils.isEmpty(advert.getVideoUrl())) {
             return;
         }
@@ -80,15 +78,13 @@ public class DownloadUtil {
                 while ((length = is.read(buffer)) != -1) {
                     fs.write(buffer, 0, length);
                 }
-                PILog.v("下载成功");
                 advert.setVideoPath(videoFile.getAbsolutePath());
                 listener.onDownloadUpdate(advert);
             } catch (Exception e) {
-                PILog.e("下载异常  " + advert.getAppName() + "  " + e);
                 videoFile.delete();
                 e.printStackTrace();
             } finally {
-                Tool.closeStream(fs, is);
+                Common.closeStream(fs, is);
             }
         }
     }

@@ -22,9 +22,9 @@ import com.bumptech.glide.Glide;
 import com.tech.playin.widget.CountdownView;
 import com.tech.playinsdk.PlayInSdk;
 import com.tech.playinsdk.http.HttpException;
-import com.tech.playinsdk.http.HttpListener;
+import com.tech.playinsdk.listener.HttpListener;
 import com.tech.playinsdk.model.entity.Advert;
-import com.tech.playinsdk.util.PILog;
+import com.tech.playinsdk.util.PlayLog;
 
 import java.io.IOException;
 
@@ -181,7 +181,6 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
             IjkMediaPlayer.loadLibrariesOnce(null);
             ijkMediaPlayer = new IjkMediaPlayer();
             String url = TextUtils.isEmpty(advert.getVideoPath()) ? advert.getVideoUrl() : advert.getVideoPath();
-            PILog.v("视频播放地址: " + url);
             ijkMediaPlayer.setDataSource(url);
             ijkMediaPlayer.setOnPreparedListener(this);
             ijkMediaPlayer.setOnVideoSizeChangedListener(this);
@@ -221,7 +220,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
             }
             @Override
             public void failure(HttpException e) {
-                PILog.e("[PlayIn] checkAvaliable: internal Error: " + e);
+                PlayLog.e("[PlayIn] checkAvaliable: internal Error: " + e);
             }
         });
     }

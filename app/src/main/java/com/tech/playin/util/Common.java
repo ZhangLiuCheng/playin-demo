@@ -8,6 +8,8 @@ import com.tech.playinsdk.model.entity.Advert;
 
 import org.json.JSONObject;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +66,17 @@ public class Common {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void closeStream(Closeable... closeables) {
+        for (Closeable stream: closeables) {
+            if (null != stream) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
