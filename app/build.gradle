@@ -7,7 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 3
-        versionName "1.0.3"
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk { abiFilters "armeabi" }
     }
@@ -38,20 +38,32 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all {
-            def outPath = variant.buildType.isDebuggable() ? "debug" : "relseae"
-            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apks/" + outPath)
-            outputFileName = "playin_${variant.productFlavors[0].name}_v${defaultConfig.versionName}_${variant.buildType.name}.apk"
+            if (!variant.buildType.isDebuggable()) {
+                def outPath = variant.buildType.isDebuggable() ? "debug" : "release"
+                variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/app/build/outputs/apk/" + outPath)
+                outputFileName = "playin_${variant.productFlavors[0].name}_v${defaultConfig.versionName}_${variant.buildType.name}.apk"
+            }
         }
     }
 
 
     flavorDimensions 'platform'
     productFlavors {
+
+        demo_test {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin'
+            resValue "string", "app_name", "PlayIN_Test"
+            buildConfigField "String", "PI_SDK_KEY", '""'
+            buildConfigField "boolean", "isTest", 'true'
+        }
+
         demo {
             dimension = 'platform'
             applicationId = 'com.tech.playin'
             resValue "string", "app_name", "PlayIN"
             buildConfigField "String", "PI_SDK_KEY", '""'
+            buildConfigField "boolean", "isTest", 'false'
         }
 
         ironsrc {
@@ -59,6 +71,7 @@ android {
             applicationId = 'com.tech.playin.is'
             resValue "string", "app_name", "playIN_IS"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDcsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY2Mzk0OTk2fQ.AIPes2mFO0kSTDJ2ui31I_5b6PMgF3EJUyP0QbzMEgo"'
+            buildConfigField "boolean", "isTest", 'false'
         }
 
         voodoo {
@@ -66,6 +79,7 @@ android {
             applicationId = 'com.tech.playin.vd'
             resValue "string", "app_name", "playIN_VD"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoic2Vzc2lvbl9rZXkiLCJ1c2VyX2lkIjo2MCwiaWF0IjoxNTY2MjA3MDgwfQ.5Z0TaqC2cs59BkeflR8XGCCJ9EfK3sDLWP2DC_TaTao"'
+            buildConfigField "boolean", "isTest", 'false'
         }
 
         amanotes {
@@ -73,6 +87,7 @@ android {
             applicationId = 'com.tech.playin.an'
             resValue "string", "app_name", "playIN_AN"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5NSwidHlwZSI6InNka19rZXkiLCJpYXQiOjE1NjU1ODM5ODR9.g7AbYH_ZIw9X1ecduM0VLgAHIdWr9ic2E0yXy8MEsQM"'
+            buildConfigField "boolean", "isTest", 'false'
         }
 
         mintegral {
@@ -80,6 +95,7 @@ android {
             applicationId = 'com.tech.playin.mg'
             resValue "string", "app_name", "playIN_MG"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3MTU2NTY3fQ.0bzcPIphInYvguVP51RKIHNjq9WRu7RPXKtdCgPUiHw"'
+            buildConfigField "boolean", "isTest", 'false'
         }
     }
 }
@@ -108,6 +124,6 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0')
 
-    implementation 'com.tech:playinsdk:1.0.3'
+    implementation 'com.tech:playinsdk:1.0.5'
 
 }

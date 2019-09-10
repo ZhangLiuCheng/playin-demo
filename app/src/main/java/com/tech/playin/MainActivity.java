@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PlayInSdk.getInstance().setTest(BuildConfig.isTest);
+
         loadingDialog = getLoadingDialog();
 
         initData();

@@ -90,9 +90,10 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
 
     @Override
     public void onPlayError(Exception ex) {
+        PlayLog.e("onPlayError  " + ex.getMessage());
         playing = false;
         removeVideoFragment();
-        showErrorDialog();
+        showErrorDialog(ex.getMessage());
     }
 
     @Override
@@ -112,9 +113,10 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         }
     }
 
-    private void showErrorDialog() {
+    private void showErrorDialog(String title) {
         if (isFinishing()) return;
         AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(title)
                 .setMessage("Exception, click confirm to return")
                 .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
                     @Override
