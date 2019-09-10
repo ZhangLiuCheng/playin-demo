@@ -18,15 +18,15 @@
             android:layout_marginLeft="20dp"
             android:gravity="center"
             android:text="Reload"
-            android:textColor="#0000ff"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="PlayIN Demo"
-            android:textColor="#000000"
+            android:text="PlayIN"
+            android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="QRCode"
-            android:textColor="#0000ff"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
     </RelativeLayout>
 
