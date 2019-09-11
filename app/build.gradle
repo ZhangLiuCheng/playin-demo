@@ -97,6 +97,14 @@ android {
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3MTU2NTY3fQ.0bzcPIphInYvguVP51RKIHNjq9WRu7RPXKtdCgPUiHw"'
             buildConfigField "boolean", "isTest", 'false'
         }
+
+        applift {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.al'
+            resValue "string", "app_name", "playIN_AL"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNzksInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY4MTcwNzk4fQ.wDJB31htv1ZKn3F4k9ZWkuwm2InZ1AQnLHvHdmuoCAc"'
+            buildConfigField "boolean", "isTest", 'false'
+        }
     }
 }
 
