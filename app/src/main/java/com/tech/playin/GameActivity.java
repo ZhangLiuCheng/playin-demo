@@ -56,7 +56,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     private void playGame() {
         Advert ad = advert;
         PlayInView playView = findViewById(R.id.playView);
-        playView.play(ad.getAdId(), 120, this);
+        playView.play(ad.getAdId(), 30, this);
 
     }
 
@@ -111,6 +111,11 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
             ex.printStackTrace();
             PlayLog.e("download app error：" + ex);
         }
+    }
+
+    @Override
+    public void onPlayForceTime() {
+
     }
 
     private void showErrorDialog(String title) {

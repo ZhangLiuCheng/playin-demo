@@ -6,8 +6,8 @@ android {
         applicationId "com.tech.playin"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 5
-        versionName "1.0.5"
+        versionCode 7
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk { abiFilters "armeabi" }
     }
@@ -105,8 +105,23 @@ android {
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNzksInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY4MTcwNzk4fQ.wDJB31htv1ZKn3F4k9ZWkuwm2InZ1AQnLHvHdmuoCAc"'
             buildConfigField "boolean", "isTest", 'false'
         }
+
+        kwalee {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.kl'
+            resValue "string", "app_name", "playIN_KL"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3NTg2OTkyfQ.odvIIfWUYD7X5LB1nwJQBmi5VOt9nOS0zgwsyfy275I"'
+            buildConfigField "boolean", "isTest", 'false'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'src/libs'
+        }
     }
 }
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -132,6 +147,9 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0')
 
-    implementation 'com.tech:playinsdk:1.0.5'
+//    implementation 'com.tech:playinsdk:1.0.6'
+
+
+    implementation(name:'playinsdk-v1.0.7', ext:'aar')
 
 }

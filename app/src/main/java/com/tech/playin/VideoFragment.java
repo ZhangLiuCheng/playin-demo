@@ -12,6 +12,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -237,6 +239,9 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
                 }
             }
         });
+
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.play_anim);
+        playNowBtn.startAnimation(animation);
     }
 
     public interface VideoFragmentListener {
