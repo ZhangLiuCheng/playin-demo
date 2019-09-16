@@ -150,6 +150,6 @@ dependencies {
 //    implementation 'com.tech:playinsdk:1.0.6'
 
 
-    implementation(name:'playinsdk-v1.0.7', ext:'aar')
+    implementation(name:'playinsdk-v1.0.8', ext:'aar')
 
 }

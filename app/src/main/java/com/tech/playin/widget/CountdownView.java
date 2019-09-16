@@ -27,6 +27,7 @@ public class CountdownView extends android.support.v7.widget.AppCompatTextView {
             if (countDown >= 0) {
                 mHandler.postDelayed(runnable, 1000);
             } else {
+                mHandler.removeCallbacksAndMessages(null);
                 CountdownView.this.listener.countfinish();
             }
         }

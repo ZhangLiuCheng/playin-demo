@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.tech.playinsdk.PlayInView;
+import com.tech.playinsdk.http.HttpException;
 import com.tech.playinsdk.listener.PlayListener;
 import com.tech.playinsdk.model.entity.Advert;
 import com.tech.playinsdk.util.PlayLog;
@@ -62,9 +63,10 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
 
     @Override
     public void onVideoFinish() {
-        if (!playing) {
-            finish();
-        }
+//        if (!playing) {
+//            finish();
+//        }
+        finish();
     }
 
     @Override
@@ -93,7 +95,9 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         PlayLog.e("onPlayError  " + ex.getMessage());
         playing = false;
         removeVideoFragment();
-        showErrorDialog(ex.getMessage());
+        if (ex instanceof HttpException) {
+            showErrorDialog(ex.getMessage());
+        }
     }
 
     @Override

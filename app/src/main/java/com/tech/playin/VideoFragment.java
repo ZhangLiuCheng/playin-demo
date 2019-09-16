@@ -199,6 +199,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
         countdownView.countDown(advert.getVideoTime(), new CountdownView.CountdownListener() {
             @Override
             public void countfinish() {
+                countdownView.setVisibility(View.INVISIBLE);
                 if (null != mListener) {
                     mListener.onVideoFinish();
                 }
