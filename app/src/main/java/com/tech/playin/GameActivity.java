@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.tech.playinsdk.PlayInView;
@@ -28,6 +29,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_game);
         advert = (Advert) getIntent().getSerializableExtra("advert");
         this.addVideoFragment(advert);
