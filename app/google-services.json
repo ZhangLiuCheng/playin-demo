@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "463747364590",
+    "firebase_url": "https://playinsdk.firebaseio.com",
+    "project_id": "playinsdk",
+    "storage_bucket": "playinsdk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463747364590:android:5a202bc4c443f8ab6b65ff",
+        "android_client_info": {
+          "package_name": "com.tech.playin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463747364590-btarf1blb75rc7l6ctqkmnfr53e5r3fr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoDZZJsDDCwFfc8GJvBW2zqth1dUAvMno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463747364590-btarf1blb75rc7l6ctqkmnfr53e5r3fr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

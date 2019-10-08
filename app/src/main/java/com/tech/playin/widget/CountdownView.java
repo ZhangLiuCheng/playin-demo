@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 /**
  * 倒计时
  */
-public class CountdownView extends android.support.v7.widget.AppCompatTextView {
+public class CountdownView extends androidx.appcompat.widget.AppCompatTextView {
 
     public interface CountdownListener {
         void countfinish();
