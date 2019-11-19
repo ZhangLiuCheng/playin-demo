@@ -63,6 +63,7 @@ android {
             applicationId = 'com.tech.playin'
             resValue "string", "app_name", "PlayIN"
             buildConfigField "String", "PI_SDK_KEY", '""'
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoic2Vzc2lvbl9rZXkiLCJ1c2VyX2lkIjoyNSwiaWF0IjoxNTU0OTc2NjYyfQ.Cyq0wBRczmAR_0L0OYeMAMRq7F6GS66MLAaHHlp0rZ8"'
             buildConfigField "boolean", "isTest", 'false'
         }
 
@@ -147,10 +148,10 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0')
 
-//    implementation 'com.tech:playinsdk:1.0.6'
+    implementation 'com.tech:playinsdk:1.1.3'
 
 
-    implementation(name:'playinsdk-v1.0.8', ext:'aar')
+//    implementation(name:'playinsdk-v1.0.8', ext:'aar')
 
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
 }

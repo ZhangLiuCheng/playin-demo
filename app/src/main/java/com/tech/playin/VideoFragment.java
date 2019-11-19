@@ -156,6 +156,11 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
         surfaceView.setLayoutParams(params);
     }
 
+    public boolean audioState() {
+        ToggleButton voiceTb = getView().findViewById(R.id.voice);
+        return voiceTb.isChecked();
+    }
+
     // 加载封面
     private void initCoverView() {
         coverView.setVisibility(View.VISIBLE);

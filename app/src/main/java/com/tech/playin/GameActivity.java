@@ -57,9 +57,15 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     }
 
     private void playGame() {
+        boolean audioState = true;
+        VideoFragment fragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag(TAG_VIDEO_FRAGMENT);
+        if (null != fragment) {
+            audioState = fragment.audioState();
+        }
         Advert ad = advert;
         PlayInView playView = findViewById(R.id.playView);
-        playView.play(ad.getAdId(), 30, this);
+        PlayLog.e("adid: " + ad.getAdId());
+        playView.play(ad.getAdId(), 30, true, audioState, this);
 
     }
 
