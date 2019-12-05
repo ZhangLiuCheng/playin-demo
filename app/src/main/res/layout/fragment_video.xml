@@ -63,10 +63,11 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
             android:background="@drawable/button_play_now"
-            android:text="Play Now"
+            android:text="Play Instantly"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:visibility="gone"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

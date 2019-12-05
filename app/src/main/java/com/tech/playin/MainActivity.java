@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
         setContentView(R.layout.activity_main);
 
         PlayInSdk.getInstance().setTest(BuildConfig.isTest);
+        PlayInSdk.getInstance().setLog(true);
 
         loadingDialog = getLoadingDialog();
 
