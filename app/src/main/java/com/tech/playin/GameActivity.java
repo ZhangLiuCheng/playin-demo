@@ -1,12 +1,7 @@
 package com.tech.playin;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -20,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.tech.playin.util.CommonUtil;
 import com.tech.playinsdk.PlayInView;
 import com.tech.playinsdk.listener.PlayListener;
 import com.tech.playinsdk.model.entity.Advert;
@@ -36,6 +32,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
 
     private Advert advert;
     private boolean playing;
+    private int count = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +73,8 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
             audioState = fragment.audioState();
         }
         final PlayInView playView = findViewById(R.id.playView);
-        playView.play(ad.getAdId(), 100, this);
-        playView.setAudioOpen(audioState);
+        playView.play(ad.getAdId(), this);
+        playView.setAudioState(audioState);
         initInfoView(ad, audioState, playView);
     }
 
@@ -91,12 +88,12 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         findViewById(R.id.installBtn).setOnClickListener(this);
         findViewById(R.id.playTimeTv).setOnClickListener(this);
         findViewById(R.id.closeInstallBtn).setOnClickListener(this);
-        ToggleButton voiceTb = findViewById(com.tech.playinsdk.R.id.audioTb);
+        ToggleButton voiceTb = findViewById(R.id.audioTb);
         voiceTb.setChecked(audioState);
         voiceTb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                playView.setAudioOpen(isChecked);
+                playView.setAudioState(isChecked);
             }
         });
     }
@@ -112,6 +109,23 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         findViewById(R.id.closeGameBtn).setOnClickListener(this);
     }
 
+    private void startCountdown() {
+        final TextView playTimeTv = findViewById(R.id.playTimeTv);
+        playTimeTv.setText(count + "s | Exit PlayIN");
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                count--;
+                playTimeTv.setText(count + "s | Exit PlayIN");
+                if (count > 0) {
+                    handler.postDelayed(this, 1000);
+                } else {
+                    PlayInView playView = findViewById(R.id.playView);
+                    playView.finish();
+                }
+            }
+        }, 1000);
+    }
 
     @Override
     public void onClick(View v) {
@@ -119,7 +133,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         Advert ad = advert;
 
         if (clickId == R.id.finishInstallBtn || clickId == R.id.installBtn) {
-            downloadApp(ad.getGoogleplayUrl());
+            CommonUtil.downloadApp(this, ad.getGoogleplayUrl());
         } else if (clickId == R.id.playTimeTv) {
             finish();
         } else if (clickId == R.id.closeGameBtn) {
@@ -148,6 +162,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     @Override
     public void onPlaystart() {
         removeVideoFragment();
+        startCountdown();
     }
 
     @Override
@@ -157,68 +172,10 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     }
 
     @Override
-    public void onPlayClose() {
-        finish();
-    }
-
-    @Override
     public void onPlayError(Exception ex) {
         PlayLog.e("onPlayError  " + ex.getMessage());
         playing = false;
         removeVideoFragment();
-//        if (ex instanceof HttpException) {
-//            showErrorDialog(ex.getMessage());
-//        }
         initFinshView();
-    }
-
-    @Override
-    public void onPlayTime(int i) {
-        TextView playTimeTv = findViewById(R.id.playTimeTv);
-        playTimeTv.setText(i + "s | Exit PlayIN");
-        if (i <= 0) {
-            initFinshView();
-        }
-    }
-
-    @Override
-    public void onPlayInstall(String url) {
-        downloadApp(url);
-    }
-
-    @Override
-    public void onPlayForceTime() {
-
-    }
-
-    private void showErrorDialog(String title) {
-        if (isFinishing()) return;
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage("Exception, click confirm to return")
-                .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                }).create();
-        dialog.setCancelable(false);
-        dialog.show();
-    }
-
-    private void downloadApp(String url) {
-        if (TextUtils.isEmpty(url) || "null".equals(url)) {
-            Toast.makeText(this, "There is no googlePlay download url", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        try {
-            Uri uri = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(intent);
-            finish();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            PlayLog.e("download app error：" + ex);
-        }
     }
 }

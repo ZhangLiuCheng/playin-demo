@@ -1,10 +1,18 @@
 package com.tech.playin.util;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Base64;
+import android.widget.Toast;
 
 import com.tech.playinsdk.model.entity.Advert;
+import com.tech.playinsdk.util.PlayLog;
 
 import org.json.JSONObject;
 
@@ -13,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Common {
+public class CommonUtil {
 
     /**
      * 验证二维码是否为PlayIn的.
@@ -77,6 +85,38 @@ public class Common {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+
+    public static void showErrorDialog(final Activity activity, String title) {
+        if (activity.isFinishing()) return;
+        AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setMessage("Exception, click confirm to return")
+                .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        activity.finish();
+                    }
+                }).create();
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    public static void downloadApp(final Activity activity, String url) {
+        if (TextUtils.isEmpty(url) || "null".equals(url)) {
+            Toast.makeText(activity, "There is no googlePlay download url", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            activity.startActivity(intent);
+            activity.finish();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            PlayLog.e("download app error：" + ex);
         }
     }
 }

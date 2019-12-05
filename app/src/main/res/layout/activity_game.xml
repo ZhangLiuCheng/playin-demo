@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginRight="15dp"
-                    android:background="@drawable/playin_btn_close"
+                    android:background="@drawable/bg_time"
                     android:gravity="center"
                     android:paddingLeft="8dp"
                     android:paddingTop="4dp"

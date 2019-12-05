@@ -84,7 +84,7 @@ public class DownloadUtil {
                 videoFile.delete();
                 e.printStackTrace();
             } finally {
-                Common.closeStream(fs, is);
+                CommonUtil.closeStream(fs, is);
             }
         }
     }

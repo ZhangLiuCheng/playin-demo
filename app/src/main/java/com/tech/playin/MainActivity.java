@@ -21,7 +21,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tech.playin.adapter.AdvertAdapter;
-import com.tech.playin.util.Common;
+import com.tech.playin.util.CommonUtil;
 import com.tech.playin.util.Constants;
 import com.tech.playin.util.DownloadUtil;
 import com.tech.playin.util.PreferencesUtil;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
 
     private void initData() {
         TextView verNameTv = findViewById(R.id.verName);
-        verNameTv.setText("v " + Common.getVerName(this));
+        verNameTv.setText("v " + CommonUtil.getVerName(this));
         sdkKey = PreferencesUtil.getSdkKey(this);
 
         // 固定渠道写死sdkkey
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
     }
 
     private void updateSdkKey(String qrCode) {
-        if (Common.codeValidate(qrCode)) {
+        if (CommonUtil.codeValidate(qrCode)) {
             sdkKey = qrCode;
             PreferencesUtil.setSdkKey(MainActivity.this, qrCode);
             initData();
