@@ -1,7 +1,9 @@
 package com.tech.playin;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -73,6 +75,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
             audioState = fragment.audioState();
         }
         final PlayInView playView = findViewById(R.id.playView);
+        PlayLog.e("adid:" + ad.getAdId());
         playView.play(ad.getAdId(), this);
         playView.setAudioState(audioState);
         initInfoView(ad, audioState, playView);
@@ -99,6 +102,14 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     }
 
     private void initFinshView() {
+        int marginTop = 0;
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            marginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250, getResources().getDisplayMetrics());
+        } else {
+            marginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
+        }
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) findViewById(R.id.maskLayout).getLayoutParams();
+        params.setMargins(0, marginTop, 0 , 0);
         mPlayInfoView.setVisibility(View.GONE);
         mPlayEndView.setVisibility(View.VISIBLE);
         ImageView gameIconIv = findViewById(R.id.finishGameIconIv);
@@ -160,13 +171,13 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     }
 
     @Override
-    public void onPlaystart() {
+    public void onPlayStart(int duration) {
         removeVideoFragment();
         startCountdown();
     }
 
     @Override
-    public void onPlayFinish() {
+    public void onPlayEnd(boolean manual) {
         PlayLog.e("onPlayFinish ");
         initFinshView();
     }
