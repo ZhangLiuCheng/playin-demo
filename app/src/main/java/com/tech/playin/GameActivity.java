@@ -6,9 +6,11 @@ import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -67,6 +69,10 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         }
     }
 
+    private void hideLoadingView() {
+        findViewById(R.id.playLoadView).setVisibility(View.GONE);
+    }
+
     private void playGame() {
         final Advert ad = advert;
         boolean audioState = true;
@@ -97,6 +103,19 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 playView.setAudioState(isChecked);
+            }
+        });
+
+        Spinner quality = findViewById(R.id.quality);
+        quality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                PlayInView playView = findViewById(R.id.playView);
+                playView.setVideoQuality((int)(id + 1));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
@@ -167,12 +186,14 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         } else {
             playing = true;
             playGame();
+            removeVideoFragment();
         }
     }
 
     @Override
     public void onPlayStart(int duration) {
-        removeVideoFragment();
+//        removeVideoFragment();
+        hideLoadingView();
         startCountdown();
     }
 
@@ -186,6 +207,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     public void onPlayError(Exception ex) {
         PlayLog.e("onPlayError  " + ex.getMessage());
         playing = false;
+        hideLoadingView();
         removeVideoFragment();
         initFinshView();
     }

@@ -6,8 +6,8 @@ android {
         applicationId "com.tech.playin"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 16
-        versionName "1.1.9"
+        versionCode 17
+        versionName "1.1.12"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk { abiFilters "arm64-v8a", "armeabi-v7a" }
     }
@@ -55,7 +55,7 @@ android {
             applicationId = 'com.tech.playin'
             resValue "string", "app_name", "PlayIN_Test"
             buildConfigField "String", "PI_SDK_KEY", '""'
-            buildConfigField "boolean", "isTest", 'true'
+            buildConfigField "boolean", "isTest", 'false'
         }
 
         demo {
@@ -114,6 +114,24 @@ android {
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3NTg2OTkyfQ.odvIIfWUYD7X5LB1nwJQBmi5VOt9nOS0zgwsyfy275I"'
             buildConfigField "boolean", "isTest", 'false'
         }
+
+        // 波在美国测试安卓设备端
+        bo {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.bo'
+            resValue "string", "app_name", "playIN_bo"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MTAsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTc2MTIxOTA4fQ.op0vVJEg5mUoOtYyXfYwgvLk3gtAJb0HAjOXXIPnVTI"'
+            buildConfigField "boolean", "isTest", 'false'
+        }
+
+        // 安卓设备端新版声音
+        nan {
+            dimension = 'platform'
+            applicationId = 'com.tech.playin.nan'
+            resValue "string", "app_name", "playIN_nan"
+            buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MjgsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTc4MDIxMDI1fQ.0KnDv0QcLLv5eqVi6qwbCnQZ0smm8tZfqRqn4e1Rj-o"'
+            buildConfigField "boolean", "isTest", 'false'
+        }
     }
 
     repositories {
@@ -136,8 +154,8 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation('com.github.bumptech.glide:glide:4.9.0') {
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation('com.github.bumptech.glide:glide:4.10.0') {
         exclude group: 'com.android.support'
     }
 
@@ -155,7 +173,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0')
 
-//    implementation 'com.tech:playinsdk:1.1.8'
+//    implementation 'com.tech:playinsdk:1.1.9'
     implementation(name:'playinsdk', ext:'aar')
 
 //    implementation 'com.google.firebase:firebase-analytics:17.2.0'

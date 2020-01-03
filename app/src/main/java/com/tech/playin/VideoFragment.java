@@ -191,6 +191,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
             ijkMediaPlayer.setDataSource(url);
             ijkMediaPlayer.setOnPreparedListener(this);
             ijkMediaPlayer.setOnVideoSizeChangedListener(this);
+            ijkMediaPlayer.setLooping(true);
             ijkMediaPlayer.prepareAsync();
             ijkMediaPlayer.start();
         } catch (IOException e) {

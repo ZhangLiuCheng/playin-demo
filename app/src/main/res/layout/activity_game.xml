@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#000000"
     tools:context=".GameActivity">
 
     <!-- 试玩布局 -->
@@ -20,6 +20,20 @@
             android:id="@+id/playInfoView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/quality"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:background="#CCCCCC"
+                android:entries="@array/quality"
+                android:layout_marginTop="13dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -129,6 +143,22 @@
 
 
     </RelativeLayout>
+
+    <!-- 游戏加载 -->
+    <RelativeLayout
+        android:id="@+id/playLoadView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal" />
+    </RelativeLayout>
+
 
     <!-- 游戏结束 -->
     <RelativeLayout
