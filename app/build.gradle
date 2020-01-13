@@ -70,7 +70,7 @@ android {
         ironsrc {
             dimension = 'platform'
             applicationId = 'com.tech.playin.is'
-            resValue "string", "app_name", "playIN_IS"
+            resValue "string", "app_name", "play_is"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDcsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY2Mzk0OTk2fQ.AIPes2mFO0kSTDJ2ui31I_5b6PMgF3EJUyP0QbzMEgo"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -78,7 +78,7 @@ android {
         voodoo {
             dimension = 'platform'
             applicationId = 'com.tech.playin.vd'
-            resValue "string", "app_name", "playIN_VD"
+            resValue "string", "app_name", "play_vd"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoic2Vzc2lvbl9rZXkiLCJ1c2VyX2lkIjo2MCwiaWF0IjoxNTY2MjA3MDgwfQ.5Z0TaqC2cs59BkeflR8XGCCJ9EfK3sDLWP2DC_TaTao"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -86,7 +86,7 @@ android {
         amanotes {
             dimension = 'platform'
             applicationId = 'com.tech.playin.an'
-            resValue "string", "app_name", "playIN_AN"
+            resValue "string", "app_name", "play_an"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5NSwidHlwZSI6InNka19rZXkiLCJpYXQiOjE1NjU1ODM5ODR9.g7AbYH_ZIw9X1ecduM0VLgAHIdWr9ic2E0yXy8MEsQM"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -94,7 +94,7 @@ android {
         mintegral {
             dimension = 'platform'
             applicationId = 'com.tech.playin.mg'
-            resValue "string", "app_name", "playIN_MG"
+            resValue "string", "app_name", "play_mg"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3MTU2NTY3fQ.0bzcPIphInYvguVP51RKIHNjq9WRu7RPXKtdCgPUiHw"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -102,7 +102,7 @@ android {
         applift {
             dimension = 'platform'
             applicationId = 'com.tech.playin.al'
-            resValue "string", "app_name", "playIN_AL"
+            resValue "string", "app_name", "play_al"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNzksInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY4MTcwNzk4fQ.wDJB31htv1ZKn3F4k9ZWkuwm2InZ1AQnLHvHdmuoCAc"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -110,7 +110,7 @@ android {
         kwalee {
             dimension = 'platform'
             applicationId = 'com.tech.playin.kl'
-            resValue "string", "app_name", "playIN_KL"
+            resValue "string", "app_name", "play_kl"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjIsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTY3NTg2OTkyfQ.odvIIfWUYD7X5LB1nwJQBmi5VOt9nOS0zgwsyfy275I"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -119,7 +119,7 @@ android {
         bo {
             dimension = 'platform'
             applicationId = 'com.tech.playin.bo'
-            resValue "string", "app_name", "playIN_bo"
+            resValue "string", "app_name", "play_bo"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1MTAsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTc2MTIxOTA4fQ.op0vVJEg5mUoOtYyXfYwgvLk3gtAJb0HAjOXXIPnVTI"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -128,7 +128,7 @@ android {
         nan {
             dimension = 'platform'
             applicationId = 'com.tech.playin.nan'
-            resValue "string", "app_name", "playIN_nan"
+            resValue "string", "app_name", "play_nan"
             buildConfigField "String", "PI_SDK_KEY", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2MjgsInR5cGUiOiJzZGtfa2V5IiwiaWF0IjoxNTc4MDIxMDI1fQ.0KnDv0QcLLv5eqVi6qwbCnQZ0smm8tZfqRqn4e1Rj-o"'
             buildConfigField "boolean", "isTest", 'false'
         }
@@ -173,7 +173,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0')
 
-//    implementation 'com.tech:playinsdk:1.1.9'
+//    implementation 'com.tech:playinsdk:1.1.10'
     implementation(name:'playinsdk', ext:'aar')
 
 //    implementation 'com.google.firebase:firebase-analytics:17.2.0'

@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerItemLisen
             return;
         }
         loadingDialog.show();
-        PlayInSdk.getInstance().configWithKey(sdkKey, new InitListener() {
+        PlayInSdk.getInstance().confirmKey(sdkKey, new InitListener() {
             @Override
             public void success() {
                 getGameList();

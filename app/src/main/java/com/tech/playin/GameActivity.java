@@ -82,7 +82,7 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         }
         final PlayInView playView = findViewById(R.id.playView);
         PlayLog.e("adid:" + ad.getAdId());
-        playView.play(ad.getAdId(), this);
+        playView.establishConnection(ad.getAdId(), this);
         playView.setAudioState(audioState);
         initInfoView(ad, audioState, playView);
     }
@@ -191,20 +191,21 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
     }
 
     @Override
-    public void onPlayStart(int duration) {
+    public void didConnectSuccess(int duration) {
+        this.count = duration;
 //        removeVideoFragment();
         hideLoadingView();
         startCountdown();
     }
 
     @Override
-    public void onPlayEnd(boolean manual) {
+    public void didDisconnect(boolean manual) {
         PlayLog.e("onPlayFinish ");
         initFinshView();
     }
 
     @Override
-    public void onPlayError(Exception ex) {
+    public void didConnectFail(Exception ex) {
         PlayLog.e("onPlayError  " + ex.getMessage());
         playing = false;
         hideLoadingView();

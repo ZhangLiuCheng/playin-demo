@@ -215,7 +215,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
 
     // 检查是否可以试玩
     private void checkAvaliable() {
-        PlayInSdk.getInstance().checkAvailable(advert.getAdId(), new HttpListener<Boolean>() {
+        PlayInSdk.getInstance().confirmPlayableAd(advert.getAdId(), new HttpListener<Boolean>() {
             @Override
             public void success(Boolean result) {
                 handler.postDelayed(new Runnable() {
