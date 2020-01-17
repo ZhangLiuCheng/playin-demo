@@ -3,8 +3,8 @@
     <domain-config>
         <domain includeSubdomains="true">playinads.com</domain>
         <trust-anchors>
-            <certificates src="@raw/charles_zlc" />
-            <certificates src="@raw/tester" />
+            <certificates src="@raw/zlc" />
+            <certificates src="@raw/wwj" />
             <certificates src="system" overridePins="true"/>
             <certificates src="user" overridePins="true"/>
         </trust-anchors>
