@@ -45,7 +45,6 @@
 
         <ToggleButton
             android:id="@+id/voice"
-            android:visibility="gone"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginLeft="10dp"
@@ -53,24 +52,41 @@
             android:checked="true"
             android:textOff="@null"
             android:textOn="@null"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
-        <Button
-            android:id="@+id/playNow"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:background="@drawable/button_play_now"
-            android:text="Play Instantly"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent">
+
+            <Button
+                android:id="@+id/playNow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_play_now"
+                android:text="Play Instantly"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/playProgress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="#FFFFFF"
+                android:indeterminateTintMode="src_atop"
+                android:translationZ="5dp" />
+        </RelativeLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -234,13 +235,17 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, I
         });
     }
 
-
     private void initPlayNow() {
-        Button playNowBtn = getView().findViewById(R.id.playNow);
+        final Button playNowBtn = getView().findViewById(R.id.playNow);
         playNowBtn.setVisibility(View.VISIBLE);
         playNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                playNowBtn.clearAnimation();
+//                playNowBtn.setVisibility(View.GONE);
+                playNowBtn.setClickable(false);
+                playNowBtn.setText("");
+                getView().findViewById(R.id.playProgress).setVisibility(View.VISIBLE);
                 if (null != mListener) {
                     mListener.onPlayGame();
                 }

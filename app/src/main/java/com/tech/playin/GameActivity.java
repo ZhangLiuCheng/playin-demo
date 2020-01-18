@@ -186,15 +186,16 @@ public class GameActivity extends AppCompatActivity implements VideoFragment.Vid
         } else {
             playing = true;
             playGame();
-            removeVideoFragment();
+//            removeVideoFragment();
         }
     }
 
     @Override
     public void didConnectSuccess(int duration) {
         this.count = duration;
-//        removeVideoFragment();
-        hideLoadingView();
+        removeVideoFragment();
+//        hideLoadingView();
+
         startCountdown();
     }
 
